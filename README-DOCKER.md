@@ -62,7 +62,7 @@ docker compose -f docker-compose.simple.yml up -d
 ```
 
 This will:
-- Start Strapi on port 1337
+- Start Strapi on port 1338
 - Use SQLite database
 - Store data in local directories
 - No nginx container (use your existing nginx)
@@ -124,9 +124,10 @@ techmind-back/
 ### Required Variables (Production)
 
 ```bash
+# Application
 NODE_ENV=production
 HOST=0.0.0.0
-PORT=1337
+PORT=1338
 
 # Generate these securely for production
 APP_KEYS=key1,key2,key3,key4
@@ -215,7 +216,7 @@ docker compose up -d
 The application provides a health check endpoint:
 
 ```bash
-curl http://localhost:1337/_health
+curl http://localhost:1338/_health
 ```
 
 ### Container Status
@@ -276,8 +277,8 @@ SQLite database is stored in: `./database/data.db`
 
 1. **Port already in use**:
    ```bash
-   # Check what's using port 1337
-   sudo lsof -i :1337
+   # Check what's using port 1338
+   sudo lsof -i :1338
    
    # Kill the process or change the port in docker-compose.yml
    ```
