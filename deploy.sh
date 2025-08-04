@@ -19,7 +19,7 @@ if ! command -v docker &> /dev/null; then
     exit 1
 fi
 
-if ! command -v docker-compose &> /dev/null; then
+if ! command -v docker compose &> /dev/null; then
     echo "❌ Error: Docker Compose is not installed!"
     exit 1
 fi
@@ -38,19 +38,19 @@ chmod 755 data/uploads
 read -p "Use simple deployment without nginx? (y/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    COMPOSE_FILE="docker-compose.simple.yml"
-    echo "📝 Using simple deployment (docker-compose.simple.yml)"
+    COMPOSE_FILE="docker compose.simple.yml"
+    echo "📝 Using simple deployment (docker compose.simple.yml)"
 else
-    COMPOSE_FILE="docker-compose.yml"
-    echo "📝 Using full deployment with nginx (docker-compose.yml)"
+    COMPOSE_FILE="docker compose.yml"
+    echo "📝 Using full deployment with nginx (docker compose.yml)"
 fi
 
 # Build and start services
 echo "🔨 Building Docker images..."
-docker-compose -f $COMPOSE_FILE build --no-cache
+docker compose -f $COMPOSE_FILE build --no-cache
 
 echo "🆙 Starting services..."
-docker-compose -f $COMPOSE_FILE up -d
+docker compose -f $COMPOSE_FILE up -d
 
 # Wait for application to be ready
 echo "⏳ Waiting for application to start..."
@@ -58,7 +58,7 @@ sleep 30
 
 # Check if services are running
 echo "🔍 Checking service status..."
-docker-compose -f $COMPOSE_FILE ps
+docker compose -f $COMPOSE_FILE ps
 
 # Test if Strapi is responding
 echo "🧪 Testing application health..."
@@ -70,7 +70,7 @@ fi
 
 # Show logs
 echo "📝 Showing recent logs..."
-docker-compose -f $COMPOSE_FILE logs --tail=50
+docker compose -f $COMPOSE_FILE logs --tail=50
 
 echo "✅ Deployment completed!"
 echo ""
@@ -79,9 +79,9 @@ echo "   - Application: http://localhost:1337"
 echo "   - Admin Panel: http://localhost:1337/admin"
 echo "   - API: http://localhost:1337/api"
 echo ""
-echo "📊 To view logs: docker-compose -f $COMPOSE_FILE logs -f"
-echo "🛑 To stop: docker-compose -f $COMPOSE_FILE down"
-echo "🔄 To restart: docker-compose -f $COMPOSE_FILE restart"
+echo "📊 To view logs: docker compose -f $COMPOSE_FILE logs -f"
+echo "🛑 To stop: docker compose -f $COMPOSE_FILE down"
+echo "🔄 To restart: docker compose -f $COMPOSE_FILE restart"
 echo ""
 echo "📁 Data is stored in:"
 echo "   - Database: ./database/"
