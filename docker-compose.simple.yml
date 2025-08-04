@@ -16,7 +16,7 @@ services:
       - ../data:/app/data/uploads
       - ../database:/app/.tmp
     ports:
-      - "1338:1337"
+      - "1437:1337"
 
 # Note: No external volumes needed since we're using bind mounts
 # This makes it easier to backup and manage your data

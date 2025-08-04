@@ -67,7 +67,7 @@ docker compose -f $COMPOSE_FILE ps
 
 # Test if Strapi is responding
 echo "🧪 Testing application health..."
-if curl -f http://localhost:1338/_health > /dev/null 2>&1; then
+if curl -f http://localhost:1437/_health > /dev/null 2>&1; then
     echo "✅ Application is healthy!"
 else
     echo "⚠️  Application might still be starting up..."
@@ -80,9 +80,9 @@ docker compose -f $COMPOSE_FILE logs --tail=50
 echo "✅ Deployment completed!"
 echo ""
 echo "🌐 Your Strapi application should be available at:"
-echo "   - Application: http://localhost:1338"
-echo "   - Admin Panel: http://localhost:1338/admin"
-echo "   - API: http://localhost:1338/api"
+echo "   - Application: http://localhost:1437"
+echo "   - Admin Panel: http://localhost:1437/admin"
+echo "   - API: http://localhost:1437/api"
 echo ""
 echo "📊 To view logs: docker compose -f $COMPOSE_FILE logs -f"
 echo "🛑 To stop: docker compose -f $COMPOSE_FILE down"

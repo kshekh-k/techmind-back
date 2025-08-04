@@ -16,7 +16,7 @@ services:
       - /app/node_modules
       - strapi-uploads-dev:/app/public/uploads
     ports:
-      - "1338:1337"
+      - "1437:1337"
     networks:
       - strapi-dev-network
 

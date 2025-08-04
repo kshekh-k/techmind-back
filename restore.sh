@@ -49,4 +49,4 @@ docker compose up -d
 
 echo ""
 echo "✅ Restore process completed!"
-echo "🌐 Your application should be available shortly at http://localhost:1338"
+echo "🌐 Your application should be available shortly at http://localhost:1437"
