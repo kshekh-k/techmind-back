@@ -14,19 +14,17 @@ services:
       DATABASE_FILENAME: .tmp/data.db
       NODE_ENV: production
     volumes:
-      - strapi-uploads:/app/public/uploads
-      - strapi-data:/app/data/uploads
-      - strapi-database:/app/.tmp
+      - ../uploads:/app/public/uploads
+      - ../data:/app/data/uploads
+      - ../database:/app/.tmp
     ports:
       - "1337:1337"
     networks:
       - strapi-network
 
-volumes:
-  strapi-uploads:
-  strapi-data:
-  strapi-database:
-
 networks:
   strapi-network:
     driver: bridge
+
+# Note: Using bind mounts instead of named volumes
+# Data is stored outside the repository in parent directory

@@ -24,25 +24,30 @@ if ! command -v docker compose &> /dev/null; then
     exit 1
 fi
 
-# Create necessary directories for bind mounts
-echo "📁 Creating necessary directories..."
-mkdir -p uploads
-mkdir -p data/uploads
-mkdir -p database
+# Create necessary directories for bind mounts outside the repo
+echo "📁 Creating necessary directories outside repository..."
+mkdir -p ../uploads
+mkdir -p ../data/uploads
+mkdir -p ../database
 
 # Set proper permissions
-chmod 755 uploads data database
-chmod 755 data/uploads
+chmod 755 ../uploads ../data ../database
+chmod 755 ../data/uploads
+
+echo "📁 Data directories created:"
+echo "   - Database: $(realpath ../database)"
+echo "   - Uploads: $(realpath ../uploads)"
+echo "   - Data uploads: $(realpath ../data/uploads)"
 
 # Choose deployment type
 read -p "Use simple deployment without nginx? (y/n): " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    COMPOSE_FILE="docker compose.simple.yml"
-    echo "📝 Using simple deployment (docker compose.simple.yml)"
+    COMPOSE_FILE="docker-compose.simple.yml"
+    echo "📝 Using simple deployment (docker-compose.simple.yml)"
 else
-    COMPOSE_FILE="docker compose.yml"
-    echo "📝 Using full deployment with nginx (docker compose.yml)"
+    COMPOSE_FILE="docker-compose.yml"
+    echo "📝 Using full deployment with nginx (docker-compose.yml)"
 fi
 
 # Build and start services
@@ -84,6 +89,6 @@ echo "🛑 To stop: docker compose -f $COMPOSE_FILE down"
 echo "🔄 To restart: docker compose -f $COMPOSE_FILE restart"
 echo ""
 echo "📁 Data is stored in:"
-echo "   - Database: ./database/"
-echo "   - Uploads: ./uploads/"
-echo "   - Data uploads: ./data/uploads/"
+echo "   - Database: $(realpath ../database)/"
+echo "   - Uploads: $(realpath ../uploads)/"
+echo "   - Data uploads: $(realpath ../data/uploads)/"

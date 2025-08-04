@@ -14,9 +14,9 @@ services:
       DATABASE_FILENAME: .tmp/data.db
       NODE_ENV: production
     volumes:
-      - ./uploads:/app/public/uploads
-      - ./data:/app/data/uploads
-      - ./database:/app/.tmp
+      - ../uploads:/app/public/uploads
+      - ../data:/app/data/uploads
+      - ../database:/app/.tmp
     ports:
       - "1337:1337"
 
