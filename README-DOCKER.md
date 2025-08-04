@@ -4,9 +4,10 @@ This repository contains a Strapi application configured for Docker deployment w
 
 ## 📋 Prerequisites
 
-- Docker (version 20.10 or higher)
-- Docker Compose (version 1.29 or higher)
+- Docker (version 24.0 or higher)
+- Docker Compose V2 (version 2.20 or higher) - comes with modern Docker installations
 - Git
+- Node.js 20+ (for local development)
 
 ## 🚀 Quick Start
 
@@ -16,6 +17,8 @@ This repository contains a Strapi application configured for Docker deployment w
 git clone <your-repo-url>
 cd techmind-back
 ```
+
+> **Note**: This project uses Node.js 20+ and Docker Compose V2 (modern syntax with `docker compose` instead of `docker-compose`)
 
 ### 2. Environment Configuration
 
@@ -55,7 +58,7 @@ The script will ask if you want to use simple deployment (recommended for existi
 Use this if you already have nginx running on your server:
 
 ```bash
-docker-compose -f docker-compose.simple.yml up -d
+docker compose -f docker-compose.simple.yml up -d
 ```
 
 This will:
@@ -69,7 +72,7 @@ This will:
 Use this for a complete setup with nginx included:
 
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Option 3: Development Mode
@@ -77,7 +80,7 @@ docker-compose up -d
 For development with hot reloading:
 
 ```bash
-docker-compose -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.dev.yml up -d
 ```
 
 ## 🌐 Nginx Configuration
@@ -166,43 +169,43 @@ STRAPI_LOG_LEVEL=info
 
 ```bash
 # Simple deployment
-docker-compose -f docker-compose.simple.yml up -d
+docker compose -f docker-compose.simple.yml up -d
 
 # Full deployment
-docker-compose up -d
+docker compose up -d
 
 # Development
-docker-compose -f docker-compose.dev.yml up -d
+docker compose -f docker-compose.dev.yml up -d
 ```
 
 ### Stop the application
 
 ```bash
-docker-compose down
+docker compose down
 ```
 
 ### View logs
 
 ```bash
 # All logs
-docker-compose logs -f
+docker compose logs -f
 
 # Strapi logs only
-docker-compose logs -f strapi
+docker compose logs -f strapi
 ```
 
 ### Restart services
 
 ```bash
-docker-compose restart
+docker compose restart
 ```
 
 ### Rebuild and restart
 
 ```bash
-docker-compose down
-docker-compose build --no-cache
-docker-compose up -d
+docker compose down
+docker compose build --no-cache
+docker compose up -d
 ```
 
 ## 📊 Monitoring and Health Checks
@@ -220,7 +223,7 @@ curl http://localhost:1337/_health
 Check if containers are running:
 
 ```bash
-docker-compose ps
+docker compose ps
 ```
 
 ### Resource Usage
@@ -246,13 +249,13 @@ tar -czf backup-$(date +%Y%m%d).tar.gz uploads/ data/ database/
 
 ```bash
 # Stop the application
-docker-compose down
+docker compose down
 
 # Restore from backup
 tar -xzf backup-YYYYMMDD.tar.gz
 
 # Start the application
-docker-compose up -d
+docker compose up -d
 ```
 
 ### Database Location
@@ -305,16 +308,16 @@ SQLite database is stored in: `./database/data.db`
 
 ```bash
 # View all logs
-docker-compose logs
+docker compose logs
 
 # Follow logs in real-time
-docker-compose logs -f
+docker compose logs -f
 
 # View specific service logs
-docker-compose logs strapi
+docker compose logs strapi
 
 # Enter container for debugging
-docker-compose exec strapi sh
+docker compose exec strapi sh
 ```
 
 ## 📈 Scaling and Performance
