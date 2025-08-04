@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  # Strapi application - simple deployment
+  strapi:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: techmind-strapi
+    restart: unless-stopped
+    env_file: .env.production
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      NODE_ENV: production
+    volumes:
+      - ./uploads:/app/public/uploads
+      - ./data:/app/data/uploads
+      - ./database:/app/.tmp
+    ports:
+      - "1337:1337"
+
+# Note: No external volumes needed since we're using bind mounts
+# This makes it easier to backup and manage your data

@@ -1,0 +1,88 @@
+# Docker ignore file for Strapi application
+# This file prevents unnecessary files from being sent to Docker build context
+
+# Node modules
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+.env
+.env.local
+.env.production
+.env.test
+
+# Development files
+*.log
+logs/
+.nyc_output
+coverage/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Build artifacts
+dist/
+build/
+.tmp/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads (keep structure but ignore content for security)
+public/uploads/*
+!public/uploads/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
+
+# Strapi cache and temp files
+.strapi-updater.json
+.cache/
+.tmp/
+
+# Documentation
+docs/
+*.md
+!README.md
+
+# Testing
+test/
+tests/
+*.test.js
+*.test.ts
+jest.config.js
+
+# Docker files (prevent recursive copying)
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+
+# Deployment files
+nginx/
+scripts/
+deploy/
+
+# Package manager lock files (keep only one)
+# yarn.lock
+# package-lock.json
+# pnpm-lock.yaml

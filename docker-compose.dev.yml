@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  # Strapi application in development mode
+  strapi-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: techmind-strapi-dev
+    restart: unless-stopped
+    environment:
+      DATABASE_CLIENT: sqlite
+      DATABASE_FILENAME: .tmp/data.db
+      NODE_ENV: development
+      STRAPI_LOG_LEVEL: debug
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - strapi-uploads-dev:/app/public/uploads
+    ports:
+      - "1337:1337"
+    networks:
+      - strapi-dev-network
+
+volumes:
+  strapi-uploads-dev:
+
+networks:
+  strapi-dev-network:
+    driver: bridge
