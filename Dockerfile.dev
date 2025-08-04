@@ -11,11 +11,11 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Install dependencies
 RUN \
-  if [ -f yarn.lock ]; then yarn install; \
-  elif [ -f package-lock.json ]; then npm install; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+    if [ -f yarn.lock ]; then yarn install; \
+    elif [ -f package-lock.json ]; then npm install; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm install; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
 # Copy source code
 COPY . .
@@ -28,7 +28,7 @@ EXPOSE 1337
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-  CMD curl -f http://localhost:1337/_health || exit 1
+    CMD curl -f http://localhost:1337/_health || exit 1
 
 # Start the application in development mode
 CMD ["npm", "run", "develop"]

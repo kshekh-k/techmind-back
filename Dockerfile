@@ -10,11 +10,11 @@ COPY package.json yarn.lock* package-lock.json* pnpm-lock.yaml* ./
 
 # Install dependencies based on the preferred package manager
 RUN \
-  if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
-  elif [ -f package-lock.json ]; then npm ci; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+    if [ -f yarn.lock ]; then yarn install --frozen-lockfile; \
+    elif [ -f package-lock.json ]; then npm ci; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm i --frozen-lockfile; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
 # Builder stage
 FROM base AS builder
@@ -31,11 +31,11 @@ ENV NODE_ENV=production
 
 # Build the application
 RUN \
-  if [ -f yarn.lock ]; then yarn build; \
-  elif [ -f package-lock.json ]; then npm run build; \
-  elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
-  else echo "Lockfile not found." && exit 1; \
-  fi
+    if [ -f yarn.lock ]; then yarn build; \
+    elif [ -f package-lock.json ]; then npm run build; \
+    elif [ -f pnpm-lock.yaml ]; then corepack enable pnpm && pnpm build; \
+    else echo "Lockfile not found." && exit 1; \
+    fi
 
 # Production stage
 FROM base AS runner
@@ -43,7 +43,7 @@ WORKDIR /app
 
 # Create a non-root user
 RUN addgroup --system --gid 1001 strapi \
-  && adduser --system --uid 1001 strapi
+    && adduser --system --uid 1001 strapi
 
 # Copy built application
 COPY --from=builder --chown=strapi:strapi /app ./
@@ -60,7 +60,7 @@ EXPOSE 1337
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=30s --retries=3 \
-  CMD curl -f http://localhost:1337/_health || exit 1
+    CMD curl -f http://localhost:1337/_health || exit 1
 
 # Start the application
 CMD ["npm", "start"]
